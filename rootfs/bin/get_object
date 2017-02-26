@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+GET_PATH=slug.tgz
+
+export BUCKET_FILE=/var/run/secrets/koli/objectstore/creds/builder-bucket
+if [ "$BUILDER_STORAGE" == "minio" ]; then
+  mkdir -p /app/objectstore/minio
+  echo "git" > /app/objectstore/minio/builder-bucket
+  export BUCKET_FILE=/app/objectstore/minio/builder-bucket
+fi
+objstorage --storage-type="$BUILDER_STORAGE" download "$SLUG_URL" "$GET_PATH"
