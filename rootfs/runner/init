@@ -11,7 +11,7 @@ mkdir -p $HOME
 if [[ $(ls -A $HOME) ]]; then
 	true
 elif [[ $SLUG_URL ]]; then
-	get_object
+	objstorage --storage-type=$BUILDER_STORAGE download $SLUG_URL slug.tgz
 	tar -xzf slug.tgz -C $HOME
 	rm slug.tgz
 	unset SLUG_URL
