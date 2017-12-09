@@ -11,8 +11,7 @@ mkdir -p $HOME
 if [[ $(ls -A $HOME) ]]; then
 	true
 elif [[ $SLUG_URL ]]; then
-	# objstorage --storage-type=$BUILDER_STORAGE download $SLUG_URL slug.tgz
-	curl $SLUG_URL --user ":${AUTH_TOKEN}" > slug.tgz
+	curl -f -s $SLUG_URL --user ":${AUTH_TOKEN}" > slug.tgz
 	tar -xzf slug.tgz -C $HOME
 	rm slug.tgz
 	unset SLUG_URL
